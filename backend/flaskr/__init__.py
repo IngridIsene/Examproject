@@ -38,8 +38,8 @@ def teardown_db(error):
     print("Closing connection")
     db.close()
 
-# initialize db if it does not exist
-#if not os.path.exists(app.config['DATABASE']):
-  #init_db()
+ #initialize db if it does not exist
+if not os.path.exists(app.config['DATABASE']):
+  init_db()
 
 from flaskr import routes
