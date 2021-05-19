@@ -42,7 +42,9 @@
 </template>
 
 <script>
-import { ref } from 'vue' 
+import { ref } from 'vue';
+import { Register } from "../services/user.services"
+
 export default {
 name: 'Register', 
 
@@ -54,20 +56,11 @@ setup() {
   const email = ref("");
 
   const submit = () => {
-      fetch("http://127.0.0.1:5000/api/register", {
-          method:"POST",
-          body: {
-              firstname: firstname.value,
-              lastname: lastname.value,
-              email: email.value, 
-              username: username.value, 
-              password: password.value
-            }
-        }).then((res) => {
-            if(res.status && res.status === 200) {
-                console.log("Registred")
-            }
-        })
+    Register({firstname: firstname.value,
+            lastname: lastname.value,
+            email: email.value, 
+            username: username.value, 
+            password: password.value})
     }
     return {
         firstname, 

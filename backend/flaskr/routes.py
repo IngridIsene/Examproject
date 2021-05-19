@@ -16,3 +16,4 @@ def register():
     userdata = request.get_json()
     result = userfunction.new_user(userdata)
     return Response(status=200)
+
