@@ -5,7 +5,6 @@ from flaskr import app
 from .dbfunctions import userfunction
 
 
-
 @app.route("/")
 def index():
   return "Return production build here"
@@ -17,3 +16,11 @@ def register():
     result = userfunction.new_user(userdata)
     return Response(status=200)
 
+@app.route("/api/login", methods = ["POST"])
+def login():
+  if request.method == "POST":
+    userdata = request.get_json()
+    result = userfunction.check_user(userdata)
+    print("Hello")
+    return Response(status=200)
+    
