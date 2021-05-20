@@ -1,5 +1,5 @@
 #from backend.dbfunctions import userfunction
-from flask import render_template, Response ,redirect, request, url_for, flash
+from flask import render_template, Response ,redirect, request, url_for, flash, jsonify
 import sys
 from flaskr import app
 from .dbfunctions import userfunction
@@ -21,6 +21,9 @@ def login():
   if request.method == "POST":
     userdata = request.get_json()
     result = userfunction.check_user(userdata)
-    print("Hello")
-    return Response(status=200)
+    if result != -1: 
+      return jsonify(result), 200
+    else:
+      return Response(status=400)
+
     

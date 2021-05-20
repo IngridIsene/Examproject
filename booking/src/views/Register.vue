@@ -1,42 +1,37 @@
 <template>
-  <div class="container">
-    
-    <form @submit.prevent="submit">
+    <div class="container form-container">
+    <form @submit.prevent="submit" class="my-form shadow">
       <div class="form-group">
-        <label for="username">username</label>
-        <input type="text" class="form-control" placeholder="Enter username"
-        v-model = "username"
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" placeholder="Enter your FirstName"
+        v-model="firstname"
         >
       </div>
-
+      <div class="form-group">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" placeholder="Enter your LastName"
+        v-model="lastname"
+        >
+      </div>
+      <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" placeholder="Enter your Email"
+        v-model="email"
+        >
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" placeholder="Enter username"
+        v-model="username"
+        >
+      </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" placeholder="password"
-        v-model = "password"
+        <input type="password" class="form-control" placeholder="Password"
+        v-model="password"
         >
       </div>
-
-      <div class="form-group">
-        <label>firstname</label>
-        <input type="text" class="form-control" placeholder="Enter firstname"
-        v-model = "firstname"
-        >
-      </div>
-
-      <div class="form-group">
-        <label>lastname</label>
-        <input type="text" class="form-control" placeholder="Enter lastname"
-        v-model = "lastname"
-        >
-      </div>
-
-      <div class="form-group">
-        <label>email</label>
-        <input type="text" class="form-control" placeholder="Enter email"
-        v-model = "email"
-        >
-      </div>
-      <button type="submit" class="btn btn-primary">submit</button>
+      <button type="submit" class="btn btn-primary my-submit">Submit</button>
     </form>
   </div>
 </template>

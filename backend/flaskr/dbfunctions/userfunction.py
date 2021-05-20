@@ -39,25 +39,28 @@ class User:
 
         conn = get_db()
         curr = conn.cursor()
-        print("DU SUGE!!!!")
         try:
             sql = (
                 """
-                (SELECT username, password FROM addresses WHERE user = ?")
+                SELECT * FROM users WHERE username=?
                 """
             )
             curr.execute(sql, (username,))
-            data=curr.fetchall()
-            if len(data) != 0: 
-                print("Hello")
-            else:
-                print("Okay")
         except sqlite3.Error as err:
             print("Error: {}".format(err))
             return -1 
         else:
-            print("Login sucess")
-            return curr.lastrowid 
+            data=curr.fetchall()
+            if len(data) != 0: 
+                if (data[0]["password"] == password):
+                    return {
+            "userId" : data[0]["userId"],
+            "username" : data[0]["username"],
+            "firstname" : data[0]["firstname"],
+            "lastname" : data[0]["lastname"],
+            "email" : data[0]["email"],
+          }
+            return -1 
         finally:
             curr.close()
             
