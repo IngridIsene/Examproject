@@ -1,5 +1,6 @@
 import { API_URL } from "../config";
 import router from "../router/index"
+import store from "../store/index";
 
 
 export function Register(userdata) {
@@ -31,6 +32,8 @@ export function Login(userdata) {
         throw new Error('Respons ikke ok');
       })
       .then((data) => {
+        store.dispatch("login")
+        store.dispatch("initUser", data)
         router.push({name: "Home"})
         console.log(data)
 

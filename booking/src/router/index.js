@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
+import Profile from "../views/Profile.vue";
 const routes = [
   {
     path: "/",
@@ -23,7 +24,13 @@ const routes = [
     path:"/register",
     name: "Register",
     component: Register
+  }, 
+  {
+    path: "/profile", 
+    name: "Profile",
+    component: Profile
   }
+  
 ];
 
 const router = createRouter({
