@@ -28,10 +28,7 @@
             <router-link to="/" class="nav-link active" aria-current="page">Logout</router-link>
           </li> 
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        
       </div>
     </div>
   </nav> 
@@ -78,6 +75,8 @@ export default {
   setup() { 
     const store = useStore();
     const IsLoggedIn = computed(() => store.getters.IsLoggedIn)
+    const BookingItems = computed(() =>store.getters.get_BookingItems)
+
     const Logout = () => {
       store.dispatch("logout")
       router.push({name:"Home"})
@@ -85,8 +84,12 @@ export default {
 
     return {
       IsLoggedIn,
-      Logout
+      Logout,
+      BookingItems
+      
     }
   },
+
+  
 }
 </script>

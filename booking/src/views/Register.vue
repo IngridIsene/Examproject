@@ -35,7 +35,7 @@
         <div class="form-group">
           <label>Password</label>
           <input type="password" class="form-control" placeholder="password"
-          v-model = "password"
+          v-model = "password"  pattern="(?=.*\d)(?=.*[\W_]).{7,}" title="Minimum of 7 characters. Should have at least one special character and one number."
           >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -78,6 +78,12 @@ setup() {
             email: email.value, 
             username: username.value, 
             password: password.value})
+
+    firstname.value = "";
+    lastname.value = "";
+    email.value = "";
+    username.value = "";
+    password.value = "";
     }
     return {
         firstname, 

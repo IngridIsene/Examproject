@@ -1,10 +1,10 @@
 <template>
 
-  <div class="container">
-    <br>
-    <br>
-    <br>
-    <br>
+<div class="container">
+<br>
+<br>
+<br>
+<br>
 
 
   <div class="row">
@@ -31,7 +31,6 @@
       </div>
     </div>
   </div>
-
   <br>
 
   <div class="row">
@@ -41,30 +40,21 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">Booking ID</th>
-              <th scope="col">Item</th>
-              <th scope="col">Rental Date</th>
+              <th scope="col">Product ID</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Rented Date</th>
 
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">456829</th>
-              <td>Bergans Jakke</td>
-              <td>21.05 - 25.05</td>
+            <tr v-for="item in bookedItems" :key="item">
+              <th scope="row" v-if="item.username == username">{{item.bookingId}}</th>
+              <td v-if="item.username == username">{{item.productId}}</td>
+              <td v-if="item.username == username">{{item.productname}}</td>
+              <td v-if="item.username == username">{{item.startdate}} - {{item.enddate}}</td>
 
             </tr>
-            <tr>
-              <th scope="row">824171</th>
-              <td>Ski</td>
-              <td>18.06 - 13.07</td>
-
-            </tr>
-            <tr>
-              <th scope="row">678643</th>
-              <td>Sovepose</td>
-              <td>18.06 - 13.07</td>
-
-            </tr>
+            
           </tbody>
         </table>
 
@@ -76,7 +66,7 @@
 
       <div class="col border border-dark" >
         <h2> Your Ads </h2>
-        <table class="table">
+        <table class="table" >
           <thead class="thead-dark">
             <tr>
               <th scope="col">Ad ID</th>
@@ -86,33 +76,60 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">456829</th>
-              <td>Bergans Jakke</td>
-
-
+            <tr v-for="item in BookingItems" :key="item">
+              <th scope="row" v-if="item.username == username">{{item.productId}}</th>
+              <td v-if="item.username == username">{{item.name}}</td>
+              <td v-if="item.username == username">
+                <button @click="deleteProduct(item.productId)" class="btn btn-light">X</button>
+              </td>
             </tr>
-            <tr>
-              <th scope="row">824171</th>
-              <td>Ski</td>
-
-
-            </tr>
-            <tr>
-              <th scope="row">678643</th>
-              <td>Sovepose</td>
-
-
-            </tr>
+            
           </tbody>
         </table>
       </div>
 
 
   </div>
+  <br>
+  <br>  
+
+  <div class="row border border-dark"> 
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6">
+      <br>
+      <h2>Create an Ad</h2>
+      <br>
+        <form @submit.prevent="submit">
+        <div class="mb-3">
+          <input class="form-control" type="text" placeholder="Product Name" aria-label="default input example" v-model = "productname" required>
+        </div>
+        <div class="mb-3">
+          <input class="form-control" type="number" placeholder="Price" aria-label="default input example" v-model = "price" required>
+        </div>
+        <div class="mb-3">
+          <input class="form-control" type="date" id="example-date-input" v-model = "start_date" required>
+        </div>
+        <div class="mb-3">
+          <input class="form-control" type="date" id="example-date-input" v-model = "end_date" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Product Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model = "description" required></textarea>
+        </div>
+       
 
 
+        <button type="submit" @click="deleteProduct(item.productId)" class="btn btn-primary">Create Ad</button>
+      </form>
+      <br>
+      <br>
+      <br>
+
+    </div>
   </div>
+
+</div>
 
 
  
@@ -137,15 +154,85 @@ h1 {
 </style>
 
 <script>
+import { ref } from 'vue';
 import { useStore } from "vuex";
+import { Add, GetBookings } from "../services/user.services";
+import { RemoveProduct } from "../services/user.services";
+import { computed } from '@vue/runtime-core';
+
+
 export default {
   name:"Profile",
   setup() {
     const store = useStore();
     const userInfo = store.getters.get_userInfo;
+    const productname = ref("");
+    const price = ref("");
+    const start_date = ref("");
+    const end_date = ref("");
+    const description = ref("");
+    const BookingItems = computed(() =>store.getters.get_BookingItems);
+    
+    
 
+    const username = userInfo[0].username;
+    console.log(username);
+
+    const deleteProduct = (productId) => {
+      RemoveProduct(productId);
+      console.log(productId);
+    }
+
+    GetBookings()
+    const bookedItems = computed(() =>store.getters.get_bookedItems);
+
+    
+
+
+    const submit = () => {
+      console.log(productname.value);
+      console.log(price.value);
+      console.log(start_date.value);
+      console.log(end_date.value);
+      console.log(description.value);
+      console.log(store.getters.get_userInfo[0].username);
+      
+      
+
+      Add({
+        username: store.getters.get_userInfo[0].username,
+        productname: productname.value,
+        price: price.value,
+        start_date: start_date.value,
+        end_date: end_date.value,
+        description: description.value
+      })
+
+      GetBookings()
+
+      productname.value = "";
+      price.value = "";
+      start_date.value = "";
+      end_date.value = "";
+      description.value = "";
+
+    }
+   
     return {
-      userInfo, 
+      userInfo,
+      productname,
+      price,
+      start_date,
+      end_date,
+      description,
+      submit,
+      BookingItems,
+      username,
+      deleteProduct,
+      bookedItems,
+      
+
+
     } 
   }
 };

@@ -51,7 +51,12 @@ setup() {
   const submit = () => {
     Login({username: username.value, 
             password: password.value})
+
+    username.value = "";
+    password.value = "";
+
     }
+
     return {
         username,
         password,
