@@ -82,7 +82,7 @@ background-color: #EFD9D1;
 text-decoration: none;
 border: 5px solid #999b84;
 }
-
+ 
 .btn {
 background-color: #e4d3cf;
 border-color: #5b6d5b;
