@@ -1,14 +1,19 @@
-#from backend.dbfunctions import userfunction
 from flask import render_template, Response ,redirect, request, url_for, flash, jsonify
 import sys
 from flaskr import app
 from .dbfunctions import userfunction
 
 
+# All functions using the POST method retrieves the data from functions in user.services.js and passes them to the functions that is located in the dbfunctions folder(userfunction.py).
+# All functions using the GET method calls on functions located in the dbfunctions (userfunction.py)
+# The responses from the database functions are then passed on to the user.services.js (frontend)
+
+
 @app.route("/")
 def index():
   return "Return production build here"
 
+# Calls on new_user function located in 
 @app.route("/api/register", methods=["POST"])
 def register():
   if request.method == "POST":
@@ -18,7 +23,6 @@ def register():
       return Response(status=200)
     else:
       return Response(status=400)
-    #return Response(status=200)
 
 
 
@@ -34,10 +38,21 @@ def booking():
   if request.method == "POST":
     info = request.get_json()
     productId = info[0]
-    myUser = info[1]
-    startdate = info[2]
-    enddate = info[3]
-    result = userfunction.book_product(productId,myUser,startdate,enddate)
+    productname = info[1]
+    myUser = info[2]
+    startdate = info[3]
+    enddate = info[4]
+    result = userfunction.book_product(productId,productname,myUser,startdate,enddate)
+    return Response(status=200)
+
+
+@app.route("/api/updatesort", methods=["POST"])
+def updatesort():
+  if request.method == "POST":
+    info = request.get_json()
+    username = info[0]
+    sort_state = info[1]
+    result = userfunction.update_sort_state(username,sort_state)
     return Response(status=200)
 
 @app.route("/api/bookings", methods=["GET"])
@@ -72,10 +87,11 @@ def products():
       return Response(status=400)
 
 
+
+
 @app.route("/api/remove/<productId>", methods = ["DELETE"])
 def remove(productId):
   if request.method == "DELETE":
-    #productId = request.get_json()
     result = userfunction.delete_product(productId)
     
     if result != -1: 

@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS users (
   password TEXT NOT NULL,
   firstname TEXT NOT NULL,
   lastname TEXT NOT NULL,
-  email TEXT NOT NULL UNIQUE
+  email TEXT NOT NULL UNIQUE,
+  sort_state TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS products ( 
@@ -21,12 +22,15 @@ description TEXT NOT NULL,
 price INTEGER NOT NULL, 
 startdate TEXT NOT NULL, 
 enddate TEXT NOT NULL, 
+booked INTEGER NOT NULL,
+productImg TEXT NOT NULL,
 FOREIGN KEY (username) REFERENCES [users](username)
 );
 
 CREATE TABLE IF NOT EXISTS booking ( 
 bookingId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 productId INTEGER NOT NULL,
+productname TEXT NOT NULL, 
 username TEXT NOT NULL,
 startdate TEXT NOT NULL, 
 enddate TEXT NOT NULL, 

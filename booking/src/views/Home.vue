@@ -1,64 +1,225 @@
 <template>
-<div>
-  <div class="parallax"></div>
-  <!-- <img src="../assets/forsidebilde.jpeg" class="forside_img" alt="forsidebilde"> -->
-  <div class="container">
-    <br>
-    <form class="d-flex">
-      <input class="form-control me-2" type="text" v-model="searchQuery" placeholder="Search for products by name" aria-label="Search" id="homesearch">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Sort By
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><button @click="sortLowHigh" class="dropdown-item" type="button">Price (Low - High) </button></li>
-          <li><button @click="sortHighLow" class="dropdown-item" type="button">Price (High - Low)</button></li>
-          <li><button @click="sortOldNew" class="dropdown-item" type="button">Oldest to Newest Ads</button></li>
-          <li><button @click="sortNewOld" class="dropdown-item" type="button">Newest to Oldest Ads</button></li> 
-        </ul>
-      </div>
-    </form>
-    
-    <div class="bookings row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+  <div>
+    <div class="parallax"></div>
+    <div class="container">
+      <br />
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search for products by name"
+          aria-label="Search"
+          id="homesearch"
+        />
 
-      <div class="col" v-for="item in resultQuery" :key="item">
-        <div class="p-3 border bg-light element">
-          <img v-bind:src="require(`../assets/${item.img}`)" alt="">
-          <br>
-          <h3>{{item.name}} </h3>
-          <p> {{item.description}} </p>
-          <p> {{item.price}} kr,- </p>
-          <button v-if="!IsLoggedIn" type="button" class ="btn btn-primary">
-            <router-link to= "/login" class="nav-link activate" aria-current="page">Book</router-link>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Sort By
           </button>
-          <button v-if="IsLoggedIn" @click="toBooking(item)" type="button" class ="btn btn-primary">Book</button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li>
+              <button @click="sortLowHigh" class="dropdown-item" type="button">
+                Price (Low - High)
+              </button>
+            </li>
+            <li>
+              <button @click="sortHighLow" class="dropdown-item" type="button">
+                Price (High - Low)
+              </button>
+            </li>
+            <li>
+              <button @click="sortOldNew" class="dropdown-item" type="button">
+                Oldest to Newest Ads
+              </button>
+            </li>
+            <li>
+              <button @click="sortNewOld" class="dropdown-item" type="button">
+                Newest to Oldest Ads
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Display As
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li>
+              <button @click="showGrid" class="dropdown-item" type="button">
+                Grid
+              </button>
+            </li>
+            <li>
+              <button @click="showList" class="dropdown-item" type="button">
+                List
+              </button>
+            </li>
+          </ul>
+        </div>
+      </form>
+
+      <br />
+      <div
+        v-if="gridState"
+        class="bookings row row-cols-2 row-cols-lg-3 g-2 g-lg-3"
+      >
+        <div class="col" v-for="item in resultQuery" :key="item">
+          <div class="outer-border p-3 border bg-light element border border-dark">
+            <img v-bind:src="require(`../assets/${item.productImg}`)" alt="" />
+            <br />
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+            <p>{{ item.price }} kr,-</p>
+
+            <button
+              v-if="!IsLoggedIn && item.booked == 0"
+              @click="toLogin()"
+              type="button"
+              class="mybutton btn btn-primary"
+            >
+              Book
+            </button>
+
+            <button
+              v-if="!IsLoggedIn && item.booked == 1"
+              type="button"
+              class="disable btn btn-primary"
+              disabled
+            >
+              Not Available
+            </button>
+
+
+            <button
+              v-if="IsLoggedIn && item.booked == 0 && item.username != username"
+              @click="toBooking(item)"
+              type="button"
+              class="btn btn-primary"
+            >
+              Book
+            </button>
+
+            <button
+              v-if="IsLoggedIn && item.booked == 1 && item.username != username"
+              type="button"
+              class="disable btn btn-primary"
+              disabled
+            >
+              Not Available
+            </button>
+
+            <button
+              v-if="IsLoggedIn && item.username == username"
+              type="button"
+              class="disable btn btn-primary"
+              disabled
+            >
+              Your Ad
+            </button>
+
+
+          </div>
         </div>
       </div>
 
-    </div>
-  </div>
+      <div v-if="!gridState">
+        <div v-for="item in resultQuery" :key="item" class="row border border-dark outer-border ">
+          <div class="col-sm-5">
+            <img
+              v-bind:src="require(`../assets/${item.productImg}`)"
+              alt=""
+              style="height: 150px; width: 150px"
+            />
+          </div>
+          <div class="left col-sm-2">
+            <h2>{{ item.name }}</h2>
+            <p>{{ item.description }}</p>
+            <p>{{ item.price }} kr,-</p>
+          
 
-  <footer>
-    <div class="main_footer">
-      <div class="contact_information">
-        <p>Customer service | customer_service@booking.com | Telephone: 9892759201</p>
+            <button
+              v-if="!IsLoggedIn && item.booked == 0"
+              @click="toLogin()"
+              type="button"
+              class="mybutton btn btn-primary"
+            >
+              Book
+            </button>
+
+            <button
+              v-if="!IsLoggedIn && item.booked == 1"
+              type="button"
+              class="disable btn btn-primary"
+              disabled
+            >
+              Not Available
+            </button>
+            <button
+              v-if="IsLoggedIn && item.booked == 0 && item.username != username"
+              @click="toBooking(item)"
+              type="button"
+              class="btn btn-primary"
+            >
+              Book
+            </button>
+            <button
+              v-if="IsLoggedIn && item.booked == 1 && item.username != username"
+              type="button"
+              class="disable btn btn-primary"
+              disabled
+            >
+              Not Available
+            </button>
+
+            <button
+              v-if="IsLoggedIn && item.username == username"
+              type="button"
+              class="disable btn btn-primary"
+              disabled
+            >
+              Your Ad
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
 
-</div>
+    <footer>
+      <br />
+      <div class="main_footer">
+        <div class="contact_information">
+          <p>
+            Customer service | customer_service@booking.com | Telephone:
+            9892759201
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
 </template>
 
-
 <style>
-
 .parallax {
-  background-image:url("../assets/forsidebilde.jpeg");
+  background-image: url("../assets/forsidebilde.jpeg");
   min-height: 550px;
   width: 100%;
   background-attachment: fixed;
   background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -68,116 +229,171 @@
   padding-bottom: 20px;
 }
 
-img{
+img {
   width: 300px;
   height: 300px;
+  max-width: 100% ;
+  max-height: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.p-3 img:hover {
-color:#d8ac9c;
-background-color: #EFD9D1;
-text-decoration: none;
-border: 5px solid #999b84;
+.outer-border{
+  max-width: 100% ;
+  max-height: 100%;
+  margin-top: 10px;
 }
- 
+
+
 .btn {
-background-color: #e4d3cf;
-border-color: #5b6d5b;
-color: black;
+  background-color: #e4d3cf;
+  border-color: #62959c;
+  color: black;
 }
 
-#homesearch{
-  width:50%;
+.disable:disabled {
+  background-color: #62959c;
+  border-color: #62959c;
+  color: black;
+}
+#homesearch {
+  width: 50%;
 }
 
-.main_footer{
-display: flex;
-justify-content: center;
-align-items: center;
-border-top: 5px solid #999b84;
-width: 100%;
-height: 120px;
-background-color:#efd9d1;  
+.main_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 5px solid #62959c;
+  width: 100%;
+  height: 120px;
+  background-color: #e4d3cf;
+}
+
+.left {
+  text-align: initial;
 }
 
 
 </style>
 
-
-
 <script>
-import { ref } from 'vue';
+import { ref } from "vue";
 import { useStore } from "vuex";
-import { computed } from '@vue/runtime-core';
+import { computed } from "@vue/runtime-core";
 import { GetProducts } from "../services/user.services";
 import { GetReversedProducts } from "../services/user.services";
+import { update_SortState } from "../services/user.services";
 import router from "../router/index";
 
 export default {
-  name: 'Home',
-  setup(){
-    const store = useStore();
-    const BookingItems = computed(() =>store.getters.get_BookingItems)
-    const IsLoggedIn = computed(() => store.getters.IsLoggedIn)
-    GetProducts()
+  name: "Home",
 
+  //intial function 
+  setup() {
+
+    //retrieves variables initialized in store/index.js with getters.
+    const store = useStore();
+    const BookingItems = computed(() => store.getters.get_BookingItems);
+    const IsLoggedIn = computed(() => store.getters.IsLoggedIn);
+    const gridState = computed(() => store.getters.get_grid_state);
+    const bookedItemsID = computed(() => store.getters.get_bookedIDs);
+    const username = store.getters.get_userInfo[0].username;
+
+    // Checks users chosen sort state
+    const sort_state = store.getters.get_userInfo[0].sort_state;
+    if (sort_state == "") {
+      GetReversedProducts();
+    } else {
+      store.dispatch(sort_state);
+      router.push({ name: "Home" });
+    }
+
+    // Handles search-field and filters based on input
     const searchQuery = ref("");
-    const resultQuery = computed(() =>{
-      if(searchQuery.value !== ""){
-      return BookingItems.value.filter((item)=>{
-        return searchQuery.value.toLowerCase().split(' ').every(v => item.name.toLowerCase().includes(v))
-      })
-      }else{
+    const resultQuery = computed(() => {
+      if (searchQuery.value !== "") {
+        return BookingItems.value.filter((item) => {
+          return searchQuery.value
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.name.toLowerCase().includes(v));
+        });
+      } else {
         return BookingItems.value;
       }
     });
 
-    const sortLowHigh = () =>{
-      store.dispatch("sortLowHigh")
-      router.push({name:"Home"})
-    }
+    //sort
+    const sortLowHigh = () => {
+      store.dispatch("sortLowHigh");
+      const info = [username, "sortLowHigh"];
+      update_SortState(info);
+      console.log("sortLowHigh");
+      router.push({ name: "Home" });
+    };
+    //sort
+    const sortHighLow = () => {
+      store.dispatch("sortHighLow");
+      const info = [username, "sortHighLow"];
+      update_SortState(info);
+      console.log("sortHighLow");
+      router.push({ name: "Home" });
+    };
+    //sort
+    const sortOldNew = () => {
+      GetProducts();
+      const info = [username, "sortOldNew"];
+      update_SortState(info);
+      console.log("sortOldNew");
+      router.push({ name: "Home" });
+    };
+    //sort
+    const sortNewOld = () => {
+      GetReversedProducts();
+      const info = [username, "sortNewOld"];
+      update_SortState(info);
+      console.log("sortNewOld");
+      router.push({ name: "Home" });
+    };
 
-    const sortHighLow = () =>{
-      store.dispatch("sortHighLow")
-      router.push({name:"Home"})
-    }
+    const toBooking = (item) => {
+      store.dispatch("set_currentItem", item);
+      router.push({ name: "Booking" });
+    };
 
-    const sortOldNew = () =>{
-      GetProducts()
-      router.push({name:"Home"})
-    }
+    const toLogin = () => {
+      router.push({ name: "Login" });
+    };
 
-    const sortNewOld = () =>{
-      GetReversedProducts()
-      router.push({name:"Home"})
-    }
-
-    const toBooking = (item) =>{
-      store.dispatch("set_currentItem",item)
-      router.push({name:"Booking"})
-    }
-
-    
-
+    const showGrid = () => {
+      store.dispatch("set_grid_state", true);
+      router.push({ name: "Home" });
+    };
+    const showList = () => {
+      store.dispatch("set_grid_state", false);
+      router.push({ name: "Home" });
+    };
 
     return {
       BookingItems,
       IsLoggedIn,
+      bookedItemsID,
       resultQuery,
       searchQuery,
       sortLowHigh,
       sortHighLow,
       sortOldNew,
       sortNewOld,
-      toBooking
-    }
-  }
-
-
-
-
+      toBooking,
+      username,
+      sort_state,
+      showGrid,
+      showList,
+      gridState,
+      toLogin,
+    };
+  },
 };
 </script>

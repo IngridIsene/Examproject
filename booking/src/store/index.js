@@ -2,178 +2,210 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
-    /*
-    BookingItems: [
-      { productId: 9000, name: "Bergans Jakke", description: "Rosa vindjakke.", img: "Berghans.jpeg" },
-      { productId: 9001,name: "Ski", description: "Rosa ski.", img: "k2ski.jpeg" },
-      { productId: 9002,name: "Sovepose", description: "Rosa sovepose.", img: "sovepose.jpeg" },
-      { productId: 9003,name: "Salomon", description: "Ringenes herre sko.", img: "Salomon.jpeg" },
-      { productId: 9004,name: "Frostsko", description: "Rosa ski.", img: "frostsko.jpeg" },
+    BookingItems: [], //list of all products
+
+    currentItem: [], //the users currently chosen item to book
+
+    bookedItems: [], //list of all booked items 
+
+    bookedItemsID: [], //list of productIDs of all booked items
+
+    loggedIn: false, //login state (true if a user is logged in)
+    
+    sort_state: "sortNewOld", //default sort state
+
+    grid_state: true, //default display (Grid)
+
+    // Userinfo of currently logged in user
+    user: [
+      { username: "", firstname: "", lastname: "", email: "", sort_state: "" },
     ],
-    */
-    BookingItems: [],
-
-    currentItem: [],
-
-    bookedItems:[],
-
-
-    loggedIn: false,
-
-    user: [{username: "", firstname: "", lastname: "", email: ""}]
-
+    
+    //today: Date().getFullYear()+'-'+(Date().getMonth()+1)+'-'+Date().getDate(),
   },
 
   mutations: {
-    sortLowHigh: state => {
-      // window.localStorage.setItem("sort", "lowHigh");
-      state.BookingItems.sort(function(a,b){
-        return a.price -b.price;
-      })
+
+    // sorts all elements in BookingItems from lowest to highest price
+    sortLowHigh: (state) => {
+      state.BookingItems.sort(function (a, b) {
+        return a.price - b.price;
+      });
     },
 
-    sortHighLow: state => {
-      state.BookingItems.sort(function(a,b){
+    // sorts all elements in BookingItems from highest price to lowest price
+    sortHighLow: (state) => {
+      state.BookingItems.sort(function (a, b) {
         return b.price - a.price;
-      })
+      });
     },
 
-    sortNewOld: state => {
-      state.BookingItems.reverse();
-    },
-
-    set_currentItem: (state,item) =>{
-      state.currentItem = []
+   
+    // updates currentItem info
+    set_currentItem: (state, item) => {
+      state.currentItem = [];
       state.currentItem.push(item);
       console.log(state.currentItem[0]);
     },
 
-    login: state => {
-      state.loggedIn = true
+    // updates login and logout state
+    login: (state) => {
+      state.loggedIn = true;
     },
-    logout: state => {
-      state.loggedIn = false
+    logout: (state) => {
+      state.loggedIn = false;
+      
     },
-    initUser: (state,data) => {
-      state.user[0].username = data.username,
-      state.user[0].firstname = data.firstname,
-      state.user[0].lastname = data.lastname,
-      state.user[0].email = data.email
 
+    // updates userinfo to current logged in user
+    initUser: (state, data) => {
+      (state.user[0].username = data.username),
+        (state.user[0].firstname = data.firstname),
+        (state.user[0].lastname = data.lastname),
+        (state.user[0].email = data.email),
+        (state.user[0].sort_state = data.sort_state);
     },
+
+    // Adds each item retrieved from products table in database to BookingItems list.
     addProduct: (state, productList) => {
       console.log(productList);
       state.BookingItems = [];
-      productList.forEach(element => {
+      productList.forEach((element) => {
         state.BookingItems.push(element);
       });
     },
 
+    // Adds each item retrieved from bookings table in database to bookedItems list.
     getBookings: (state, bookings) => {
       state.bookedItems = [];
-      // const sort = window.localStorage.getItem("sort");
-      bookings.forEach(element => {
+      bookings.forEach((element) => {
         state.bookedItems.push(element);
       });
     },
-    
+
+    // Adds each item retrieved from products table in database in reversed order to the BookingItems list.
     addProductReversed: (state, productList) => {
       productList.reverse();
       state.BookingItems = [];
-      productList.forEach(element => {
+      productList.forEach((element) => {
         state.BookingItems.push(element);
       });
     },
-    
 
+    // Removes deleted product from BookingItems list
     deleteProduct: (state, productId) => {
-
-      const index = state.BookingItems
-        .map((item) => item.productId)
-        .indexOf(productId);
+      const index = state.BookingItems.map((item) => item.productId).indexOf(
+        productId
+      );
       if (index > -1) {
         state.BookingItems.splice(index, 1);
       }
-    }
+    },
 
+    // Adds booked items productIds to the bookedItemsID list to disable  book button.
+    diasbleBook: (state, productId) => {
+      state.bookedItemsID.push(productId);
+    },
+
+    set_sort_state: (state, sortstate) => {
+      state.sort_state = sortstate;
+    },
+
+    set_grid_state: (state, grid_state) => {
+      state.grid_state = grid_state;
+    },
   },
 
-  
-
-  
-
-  //action kaller på mutaion
+  //calls on mutations
   actions: {
-    login: context => {
-      context.commit("login")
+    login: (context) => {
+      context.commit("login");
     },
-    logout: context => {
-      context.commit("logout")
+    logout: (context) => {
+      context.commit("logout");
     },
-    initUser:(context, data) => {
-      context.commit("initUser", data)
-    },
-
-    addProduct:(context,data) => {
-      context.commit("addProduct",data)
+    initUser: (context, data) => {
+      context.commit("initUser", data);
     },
 
-    addProductReversed:(context,data) => {
-      context.commit("addProductReversed",data)
+    addProduct: (context, data) => {
+      context.commit("addProduct", data);
     },
 
-    deleteProduct: (context,productId) =>{
-      context.commit("deleteProduct",productId)
+    addProductReversed: (context, data) => {
+      context.commit("addProductReversed", data);
     },
 
-    sortLowHigh: context => {
-      context.commit("sortLowHigh")
+    deleteProduct: (context, productId) => {
+      context.commit("deleteProduct", productId);
     },
 
-    sortHighLow: context => {
-      context.commit("sortHighLow")
-    },
-    
-    sortNewOld: context => {
-      context.commit("sortNewOld")
+    sortLowHigh: (context) => {
+      context.commit("sortLowHigh");
     },
 
-    set_currentItem: (context,item) =>{
-      context.commit("set_currentItem",item)
+    sortHighLow: (context) => {
+      context.commit("sortHighLow");
     },
 
-    getBookings: (context,data) => {
-      context.commit("getBookings",data)
+    sortNewOld: (context) => {
+      context.commit("sortNewOld");
     },
 
+    set_currentItem: (context, item) => {
+      context.commit("set_currentItem", item);
+    },
 
+    getBookings: (context, data) => {
+      context.commit("getBookings", data);
+    },
 
+    diasbleBook: (context, productid) => {
+      context.commit("getBookings", productid);
+    },
 
+    set_sort_state: (context, data) => {
+      context.commit("set_sort_state", data);
+    },
+
+    set_grid_state: (context, data) => {
+      context.commit("set_grid_state", data);
+    },
   },
 
   modules: {},
 
+  // retrives variables in state
   getters: {
-    get_BookingItems: state =>{
-      return state.BookingItems
+    get_BookingItems: (state) => {
+      return state.BookingItems;
     },
-    IsLoggedIn: state => {
-      return state.loggedIn === true
-    },
-
-    get_userInfo: state => {
-      return state.user
+    IsLoggedIn: (state) => {
+      return state.loggedIn === true;
     },
 
-    get_currentItem : state =>{
-      return state.currentItem
+    get_userInfo: (state) => {
+      return state.user;
     },
 
-    get_bookedItems : state =>{
-      return state.bookedItems
-    }
+    get_currentItem: (state) => {
+      return state.currentItem;
+    },
 
+    get_bookedItems: (state) => {
+      return state.bookedItems;
+    },
 
+    get_bookedIDs: (state) => {
+      return state.bookedItemsID;
+    },
+
+    get_sort_state: (state) => {
+      return state.sort_state;
+    },
+
+    get_grid_state: (state) => {
+      return state.grid_state;
+    },
   },
-
 });
