@@ -9,9 +9,16 @@ Fra før er det lagt til data i database filen schema.sql. Schema.sql inneholder
 1. users --> som inneholder alle registrerte brukere
 2. products --> Som inneholder alle annonser / utstyr som har blitt opprettet 
 3. bookings  -->  som inneholder hvem som har booket hvilket utstyr
+
+Det har blitt brukt VUE version 3 i dette prosjektet.
+Det har blitt brukt bootstrap 5 til å bygge opp applikasjonen --> https://getbootstrap.com/docs/5.0/getting-started/introduction/ 
+
+
+
+
 ________________________________________________________________________________________________________________________________________
 
-Hvordan kjøre applikasjonen? 
+## Hvordan kjøre applikasjonen? 
 
 - Selve prosjektet ligger i Examproject mappen.
 
@@ -32,9 +39,9 @@ Hvordan kjøre applikasjonen?
 
 ________________________________________________________________________________________________________________________________________
 
-FUNKSJONALITET 
+# FUNKSJONALITET 
 
-************ Logg inn / Registrer ny bruker ************:
+## Logg inn / Registrer ny bruker
 
 - Det er mulighet for å registrere ny bruker ved å trykke på "register" i navbaren oppe i venstre hjørne 
 
@@ -47,7 +54,7 @@ FUNKSJONALITET
 - Når det har blitt registrert en bruker vil brukeren få mulighet til å logge inn ved å trykke på log in i navbaren. Her logges det inn med brukernavn og passord. Hvis brukernavn og passord ikke matches kommer det følgende melding opp: "Username or password incorrect, Try again!" 
 
 
-************ Home (Bruker ikke logget inn) ************: 
+## Home (Bruker ikke logget inn) 
 
 - Det er mulighet for å se produktene/utstyret som kan bookes uten å logge inn. 
 
@@ -62,7 +69,7 @@ FUNKSJONALITET
 - Det er lagt til et søkefelt som gjør det mulig å søke etter utstyr basert på NAVN. 
 
 
-************ Home (Bruker logget inn) ************:
+## Home (Bruker logget inn) 
 
 - Brukeren vil ha den samme funksjonaliteten når han/hun har logget inn. Men følgende funksjonalitet er også lagt til: 
 
@@ -72,7 +79,7 @@ FUNKSJONALITET
 
 - Når brukeren er logget inn vil et til alternativ bli lagt inn i navmaren som heter PROFILE. 
 
-************ Profile ************: 
+## Profile 
 
 - Brukerens brukerinformasjon er lagret og vil vises under "Profile information"
 
@@ -84,8 +91,7 @@ FUNKSJONALITET
 
 - Det er KUN mulig å velge dato fra dagens dato og fremover når en annonse opprettes, så hvis man velger fra-dato: "04.06.2021" så kan til-dato IKKE være "01.06.2021" den MÅ være frem i tid. 
 
-************  Book ************: 
-
+##  Book 
 - Hvis utstyret er ledig vil en "Book" knapp vises under annonsen. Hvis man trykker på "Book" knappen vil man komme til en ny side som viser bilde av utstyret, pris, beskrivelse og availability.
 
 - Her velges perioden (til og fra dato) og det er KUN mulig å velge dato fra når utstyret er ledig. 
@@ -93,8 +99,8 @@ FUNKSJONALITET
 - Når utstyret bookes OPPDATERES knappen fra "Book" til "Not avilable" på fremsiden. Den blir også lagt til i "Your bookings" på profilen. 
 
 
-************ LAYOUT *************:
-Det har blitt brukt bootstrap 5 til å bygge opp applikasjonen --> https://getbootstrap.com/docs/5.0/getting-started/introduction/ 
+## LAYOUT
+
 
 - Det er lagt inn forside bilde på forsiden 
 
