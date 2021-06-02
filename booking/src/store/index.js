@@ -102,6 +102,23 @@ export default createStore({
         state.BookingItems.splice(index, 1);
       }
     },
+    
+    deleteBooking: (state, bookingId, productId) => {
+      const index = state.bookedItems.map((item) => item.bookingId).indexOf(
+        bookingId
+      );
+      if (index > -1) {
+        state.bookedItems.splice(index, 1);
+      }
+      const index2 = state.bookedItemsID.map((item) => item.productId).indexOf(
+        productId
+      );
+      if (index2 > -1) {
+        state.bookedItemsID.splice(index2, 1);
+      }
+
+
+    },
 
     // Adds booked items productIds to the bookedItemsID list to disable  book button.
     diasbleBook: (state, productId) => {
@@ -139,6 +156,10 @@ export default createStore({
 
     deleteProduct: (context, productId) => {
       context.commit("deleteProduct", productId);
+    },
+
+    deleteBooking: (context, bookingId, productId) => {
+      context.commit("deleteBooking", bookingId, productId);
     },
 
     sortLowHigh: (context) => {

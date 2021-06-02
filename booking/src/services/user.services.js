@@ -80,6 +80,24 @@ export function RemoveProduct(productId) {
     }
   });
 }
+export function RemoveBooking(IDs) {
+  fetch(`${API_URL}/removebooking`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(IDs)
+  }).then((res) => {
+    if (res.status && res.status === 200) {
+      store.dispatch("deleteBooking", IDs[0], IDs[1]);
+      GetProducts();
+      GetBookings();
+      router.push({ name: "Home" });
+      console.log("Booking deleted!");
+    }
+  });
+}
 
 // Retrieves all products from database
 export function GetProducts() {

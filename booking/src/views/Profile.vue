@@ -67,6 +67,14 @@
               <td v-if="item.username == username">
                 {{ item.startdate }} - {{ item.enddate }}
               </td>
+              <td v-if="item.username == username">
+                <button
+                  @click="deleteBooking(item.bookingId,item.productId)"
+                  class="btn btn-light"
+                >
+                  X
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -208,7 +216,7 @@ h1 {
 import { ref } from "vue";
 import { useStore } from "vuex";
 import { Add, GetBookings } from "../services/user.services";
-import { RemoveProduct } from "../services/user.services";
+import { RemoveProduct, RemoveBooking } from "../services/user.services";
 import { computed } from "@vue/runtime-core";
 
 export default {
@@ -231,6 +239,14 @@ export default {
     const deleteProduct = (productId) => {
       RemoveProduct(productId);
       console.log(productId);
+     
+    };
+
+    const deleteBooking = (bookingId, productId) => {
+      let IDs = [bookingId, productId]
+      RemoveBooking(IDs);
+    
+      
     };
 
     GetBookings();
@@ -256,6 +272,7 @@ export default {
     };
     const today = currentDate();
 
+   
     // When form is submitted, the function Adds the product, updates the page and emties the input fields.
     const submit = () => {
 
@@ -268,7 +285,7 @@ export default {
         description: description.value,
         productImg: images.value,
       });
-
+      
       GetBookings();
 
       productname.value = "";
@@ -293,7 +310,10 @@ export default {
       deleteProduct,
       bookedItems,
       currentDate,
-      today
+      today,
+      deleteBooking,
+      
+      
     };
   },
 };

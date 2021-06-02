@@ -244,6 +244,34 @@ class User:
         finally:
             curr.close()
 
+    def delete_booking(self,bookingId, productId):
+            conn = get_db()
+            curr = conn.cursor()
+            try:
+                sql = (
+                    """
+                    DELETE FROM booking WHERE bookingId = ?
+                    """
+                )
+
+                sql2 = (
+                    """
+                    UPDATE products SET booked = 0 WHERE productId = ?
+                    """
+                )
+
+                curr.execute(sql, (bookingId,))
+                curr.execute(sql2, (productId,))
+                conn.commit()
+
+            except sqlite3.Error as err:
+                print("Error: {}".format(err))
+                return -1 
+            else:
+                print("Booking Removed from db.")
+                return curr.lastrowid 
+            finally:
+                curr.close()
 
     
         

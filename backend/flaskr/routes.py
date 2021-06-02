@@ -100,4 +100,15 @@ def remove(productId):
       return Response(status=400)
 
 
-    
+@app.route("/api/removebooking", methods = ["POST"])
+def removebooking():
+  if request.method == "POST":
+    IDs = request.get_json()
+    bookingId = IDs[0]
+    productId = IDs[1]
+    result = userfunction.delete_booking(bookingId, productId)
+
+    if result != -1: 
+      return jsonify(result), 200
+    else:
+      return Response(status=400)
