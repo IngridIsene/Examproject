@@ -178,6 +178,8 @@
               <option value="sovepose.jpeg">Sovepose</option>
               <option value="Berghans.jpeg">Jakke</option>
               <option value="frostsko.jpeg">Frostsko</option>
+              <option value="surf.jpeg">Surf</option>
+              <option value="Golf.jpeg">Golf utstyr</option>
             </select>
           </div>
 
