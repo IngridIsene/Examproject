@@ -97,6 +97,8 @@ ________________________________________________________________________________
 
 - Her velges perioden (til og fra dato) og det er KUN mulig å velge dato fra når utstyret er ledig. 
 
+- Brukeren MÅ velge dato for booking og vil ikke kunne gå videre uten å velge dato
+
 - Når utstyret bookes OPPDATERES knappen fra "Book" til "Not avilable" på fremsiden. Den blir også lagt til i "Your bookings" på profilen. 
 
 
