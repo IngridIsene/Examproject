@@ -204,7 +204,7 @@
         <div class="contact_information">
           <p>
             Customer service | customer_service@booking.com | Telephone:
-            9892759201
+            12345678
           </p>
         </div>
       </div>
