@@ -120,7 +120,6 @@ ________________________________________________________________________________
 
 - Applikasjonen fungerer på mobilskjermer ned til 375px
 
-## Session storage
-
+## Refresh Not log out 
 - Hvis bruker refresher siden blir ikke bruker logget ut. 
 - Funnet: https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh 
