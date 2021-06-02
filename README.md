@@ -15,7 +15,7 @@ Det har blitt brukt bootstrap 5 til å bygge opp applikasjonen --> https://getbo
 Bootstrap er brukt til blant annet login form, registration form, booking cards, create add, your ads, your bookings og booking side.  
 
 ## GITHUB
-Her er link til github prosjektet her ligger sourcecode tilgjengelig for nedlastning: https://github.com/IngridIsene/Examproject
+Her er link til github prosjektet, her ligger sourcecode tilgjengelig for nedlastning: https://github.com/IngridIsene/Examproject
 
 
 
@@ -37,11 +37,9 @@ ________________________________________________________________________________
 
 - Det vil da komme opp backend som et alternativ --> kjørt da commanden "cd backend" 
 
-- Aktiver venv ved command: source venv/bin/activate (PÅ MAC)
-
 - Når man er inne i backend filen --> kjør command "python3 booking.py" (Da starter backend)
 
-
+- HVIS venv må aktiveres i backend gjøres det med følgende command: source venv/bin/activate (PÅ MAC)
 ________________________________________________________________________________________________________________________________________
 
 # FUNKSJONALITET 
@@ -116,7 +114,9 @@ ________________________________________________________________________________
 
 - Det er lagt til en footer på forsiden 
 
-- Applikasjonen fungerer på mobilskjermer på 375px 
+- Hver annonse inneholder et bilde
+
+- Applikasjonen fungerer på mobilskjermer ned til 375px
 
 ## Session storage
 
