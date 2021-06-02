@@ -126,4 +126,5 @@ ________________________________________________________________________________
 
 ## Refresh Not log out 
 - Hvis bruker refresher siden blir ikke bruker logget ut. 
-- Funnet: https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh 
+- Her har det blitt brukt Vuex-persistedstate
+- Kode er funnet: https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh 
