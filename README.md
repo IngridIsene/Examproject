@@ -102,9 +102,13 @@ ________________________________________________________________________________
 
 ## LAYOUT
 
-
 - Det er lagt inn forside bilde på forsiden 
 
 - Det er lagt til en footer på forsiden 
 
 - Applikasjonen fungerer på mobilskjermer på 375px 
+
+## SESSION STORAGE
+
+- Hvis siden blir reloadet vil bruker ikke bli logget ut. 
+- Hentet fra: https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh 
