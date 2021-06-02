@@ -5,7 +5,7 @@ Det er lagt til en bruker til sensor i databasen som kan brukes hvis ønskelig:
 Brukernavn: Sensor 
 Passord: Sommer2021! 
 
-Fra før er det lagt til data i database filen schema.sql. Schema.sql inneholder tre tables:
+Fra før er det lagt til data i database filen database.db,  Schema.sql inneholder tre tables:
 1. users --> som inneholder alle registrerte brukere
 2. products --> Som inneholder alle annonser / utstyr som har blitt opprettet 
 3. bookings  -->  som inneholder hvem som har booket hvilket utstyr
