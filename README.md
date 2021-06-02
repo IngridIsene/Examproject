@@ -12,6 +12,7 @@ Fra før er det lagt til data i database filen schema.sql. Schema.sql inneholder
 
 Det har blitt brukt VUE version 3 i dette prosjektet.
 Det har blitt brukt bootstrap 5 til å bygge opp applikasjonen --> https://getbootstrap.com/docs/5.0/getting-started/introduction/ 
+Bootstrap er brukt til blant annet login form, registration form, booking cards, create add, your ads, your bookings og booking side.  
 
 
 

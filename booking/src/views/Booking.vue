@@ -39,34 +39,34 @@
           <form @submit.prevent="submit">
             <p>Start date:</p>
             <input
-              required
               class="col form-control"
               v-model="startdate"
               v-bind:min="`${item.startdate}`"
               v-bind:max="`${item.enddate}`"
               type="date"
               id="example-date-input"
+              required
             />
             <p>End date:</p>
             <input
-              required
               class="form-control"
               v-model="enddate"
               v-bind:min="`${item.startdate}`"
               v-bind:max="`${item.enddate}`"
               type="date"
               id="example-date-input"
+              required
             />
 
             <br />
-          </form>
-          <button
+            <button
             type="submit"
-            @click="bookProduct(item.productId, item.name)"
             class="btn btn-primary"
           >
             Book
           </button>
+          </form>
+          
         </ul>
       </div>
     </div>
@@ -94,23 +94,28 @@ export default {
     const startdate = ref("");
     const enddate = ref("");
 
-    // calls on function located in user.services.js by passing necessary data.
-    const bookProduct = (productId, productname) => {
+  
+
+    const submit = () => {
+      console.log("inside submit")
       const info = [
-        productId,
-        productname,
+        currentItem[0].productId,
+        currentItem[0].name,
         myUser,
         startdate.value,
         enddate.value,
       ];
+      console.log(info);
       BookProduct(info);
-    };
+    }
+
+    
 
     return {
       currentItem,
-      bookProduct,
       startdate,
       enddate,
+      submit,
     };
   },
 };

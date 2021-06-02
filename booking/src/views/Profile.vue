@@ -145,7 +145,7 @@
               class="form-control"
               type="date"
               id="example-date-input"
-              :min="today"
+              :min="start_date"
               v-model="end_date"
               required
             />
@@ -175,7 +175,6 @@
 
           <button
             type="submit"
-            @click="deleteProduct(item.productId)"
             class="btn btn-primary"
           >
             Create Ad
