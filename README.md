@@ -82,7 +82,7 @@ ________________________________________________________________________________
 
 - Det er også lagt til en ekstra knapp som viser "Your ad" under utstyret som du selv har lagt, dvs at det IKKE er mulig å booke egne annonser. 
 
-- Når brukeren er logget inn vil et til alternativ bli lagt inn i navmaren som heter PROFILE. 
+- Når brukeren er logget inn vil et til alternativ bli lagt inn i navbaren som heter PROFILE. 
 
 ## Profile 
 
@@ -93,6 +93,8 @@ ________________________________________________________________________________
 - "Your Ads" viser oversikt over egne annonser. Det er lagt til en knapp i denne tabellen "X" som gjør det mulig for brukeren å SLETTE egne annonser (Må være innloget for dette og det er kun mulig å slette egne annonser). Dersom en annonse slettes forsvinner den fra forsiden, MEN den vil ikke slettes fra "Your Ads" dersom en annen bruker har booket utstyret. 
 
 - Brukeren kan laste opp egne annonser under "Create an Ad". Her fylles "Product name", "Price", "Dato til og fra" og "Description" ut. Det er også mulig å velge default bilder til annonsen i en dropdown meny. Når en annonse er opprettet blir den lagt til på forsiden og i "Your Ads" tabellen.
+
+- Brukeren må fylle ut alle felt når en annonse opprettes og vil få en feilmelding hvis dette ikke blir gjort.
 
 - Det er KUN mulig å velge dato fra dagens dato og fremover når en annonse opprettes, så hvis man velger fra-dato: "04.06.2021" så kan til-dato IKKE være "01.06.2021" den MÅ være frem i tid. 
 
