@@ -101,6 +101,8 @@ ________________________________________________________________________________
 
 - Når utstyret bookes OPPDATERES knappen fra "Book" til "Not avilable" på fremsiden. Den blir også lagt til i "Your bookings" på profilen. 
 
+- På profilen vil det vises oversikt over egne bookinger, det er også lagt til en knapp som gjør det mulig å slette bookinger. Da vil den fjernes fra "your bookings" og annonsen vil legges til på forsiden igjen med knapp "Book". 
+
 
 ## LAYOUT
 
@@ -110,7 +112,3 @@ ________________________________________________________________________________
 
 - Applikasjonen fungerer på mobilskjermer på 375px 
 
-## SESSION STORAGE
-
-- Hvis siden blir reloadet vil bruker ikke bli logget ut. 
-- Hentet fra: https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh 
