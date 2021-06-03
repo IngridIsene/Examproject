@@ -3,7 +3,7 @@
     <h1 class="h3 mb-3 font-weight-normal">Please reigster</h1>
     <div class="text-center">
       <form @submit.prevent="submit" class="outer-border">
-        <div class="form-group" style="margin-top:30px">
+        <div class="form-group" style="margin-top: 30px">
           <label for="firstname">First Name</label>
           <input
             type="text"

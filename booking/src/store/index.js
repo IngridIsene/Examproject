@@ -1,26 +1,19 @@
 import { createStore } from "vuex";
-import createPersistedState from 'vuex-persistedstate';
-import * as Cookies from 'js-cookie';
 
 
 export default createStore({
-  plugins: [
-    createPersistedState({
-      getState: (key) => Cookies.getJSON(key),
-      setState: (key, state) => Cookies.set(key, state, { expires: 3, secure: true })
-    })
-  ],
+
   state: {
     BookingItems: [], //list of all products
 
     currentItem: [], //the users currently chosen item to book
 
-    bookedItems: [], //list of all booked items 
+    bookedItems: [], //list of all booked items
 
     bookedItemsID: [], //list of productIDs of all booked items
 
     loggedIn: false, //login state (true if a user is logged in)
-    
+
     sort_state: "sortNewOld", //default sort state
 
     grid_state: true, //default display (Grid)
@@ -29,12 +22,11 @@ export default createStore({
     user: [
       { username: "", firstname: "", lastname: "", email: "", sort_state: "" },
     ],
-    
+
     //today: Date().getFullYear()+'-'+(Date().getMonth()+1)+'-'+Date().getDate(),
   },
 
   mutations: {
-
     // sorts all elements in BookingItems from lowest to highest price
     sortLowHigh: (state) => {
       state.BookingItems.sort(function (a, b) {
@@ -49,7 +41,6 @@ export default createStore({
       });
     },
 
-   
     // updates currentItem info
     set_currentItem: (state, item) => {
       state.currentItem = [];
@@ -63,7 +54,6 @@ export default createStore({
     },
     logout: (state) => {
       state.loggedIn = false;
-      
     },
 
     // updates userinfo to current logged in user
@@ -110,22 +100,20 @@ export default createStore({
         state.BookingItems.splice(index, 1);
       }
     },
-    
+
     deleteBooking: (state, bookingId, productId) => {
-      const index = state.bookedItems.map((item) => item.bookingId).indexOf(
-        bookingId
-      );
+      const index = state.bookedItems
+        .map((item) => item.bookingId)
+        .indexOf(bookingId);
       if (index > -1) {
         state.bookedItems.splice(index, 1);
       }
-      const index2 = state.bookedItemsID.map((item) => item.productId).indexOf(
-        productId
-      );
+      const index2 = state.bookedItemsID
+        .map((item) => item.productId)
+        .indexOf(productId);
       if (index2 > -1) {
         state.bookedItemsID.splice(index2, 1);
       }
-
-
     },
 
     // Adds booked items productIds to the bookedItemsID list to disable  book button.

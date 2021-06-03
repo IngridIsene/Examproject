@@ -14,34 +14,32 @@
 
     <div class="row">
       <div class="col-sm-3 card" style="width: 250px">
-          <img
-            src="../assets/profilpic.jpeg"
-            style="height: 200px; width: 250px"
-            class="card-img-top"
-            alt="..."
-          />
-          <div v-for="info in userInfo" :key="info" class="card-body">
-            <p class="card-text">{{ info.firstname }} {{ info.lastname }}</p>
-          </div>
+        <img
+          src="../assets/profilpic.jpeg"
+          style="height: 200px; width: 250px"
+          class="card-img-top"
+          alt="..."
+        />
+        <div v-for="info in userInfo" :key="info" class="card-body">
+          <p class="card-text">{{ info.firstname }} {{ info.lastname }}</p>
+        </div>
       </div>
 
       <div class="col-sm-9 card" style="width: 60rem">
-          <div class="card-header">
-            <h2>Profile Information</h2>
-          </div>
-          <ul
-            v-for="info in userInfo"
-            :key="info"
-            class="list-group list-group-flush"
-          >
-            <li class="list-group-item">{{ info.firstname }}</li>
-            <li class="list-group-item">{{ info.lastname }}</li>
-            <li class="list-group-item">{{ info.username }}</li>
-            <li class="list-group-item">{{ info.email }}</li>
-          </ul>
+        <div class="card-header">
+          <h2>Profile Information</h2>
+        </div>
+        <ul
+          v-for="info in userInfo"
+          :key="info"
+          class="list-group list-group-flush"
+        >
+          <li class="list-group-item">{{ info.firstname }}</li>
+          <li class="list-group-item">{{ info.lastname }}</li>
+          <li class="list-group-item">{{ info.username }}</li>
+          <li class="list-group-item">{{ info.email }}</li>
+        </ul>
       </div>
-    
-      
     </div>
     <br />
 
@@ -69,7 +67,7 @@
               </td>
               <td v-if="item.username == username">
                 <button
-                  @click="deleteBooking(item.bookingId,item.productId)"
+                  @click="deleteBooking(item.bookingId, item.productId)"
                   class="btn btn-light"
                 >
                   X
@@ -183,12 +181,7 @@
             </select>
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            Create Ad
-          </button>
+          <button type="submit" class="btn btn-primary">Create Ad</button>
         </form>
         <br />
         <br />
@@ -224,7 +217,6 @@ import { computed } from "@vue/runtime-core";
 export default {
   name: "Profile",
   setup() {
-
     // initial variables from store/index.js
     const store = useStore();
     const userInfo = store.getters.get_userInfo;
@@ -236,24 +228,19 @@ export default {
     const images = ref("");
     const BookingItems = computed(() => store.getters.get_BookingItems);
     const username = userInfo[0].username;
-    
 
     const deleteProduct = (productId) => {
       RemoveProduct(productId);
       console.log(productId);
-     
     };
 
     const deleteBooking = (bookingId, productId) => {
-      let IDs = [bookingId, productId]
+      let IDs = [bookingId, productId];
       RemoveBooking(IDs);
-    
-      
     };
 
     GetBookings();
     const bookedItems = computed(() => store.getters.get_bookedItems);
-
 
     // Gets current date and adds missing leading zeros.
     const currentDate = () => {
@@ -270,14 +257,11 @@ export default {
       }
 
       return `${current.getFullYear()}-${month}-${day}`;
-  
     };
     const today = currentDate();
 
-   
     // When form is submitted, the function Adds the product, updates the page and emties the input fields.
     const submit = () => {
-
       Add({
         username: store.getters.get_userInfo[0].username,
         productname: productname.value,
@@ -287,7 +271,7 @@ export default {
         description: description.value,
         productImg: images.value,
       });
-      
+
       GetBookings();
 
       productname.value = "";
@@ -314,8 +298,6 @@ export default {
       currentDate,
       today,
       deleteBooking,
-      
-      
     };
   },
 };

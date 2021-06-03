@@ -2,11 +2,9 @@ import { API_URL } from "../config";
 import router from "../router/index";
 import store from "../store/index";
 
-
 // All functions using POST method converts userinput and passes data to the backend(routes.py file) which then calls on functions handling the database.
 // All functions using GET method retrieves data from the backend(routes.py file) which then calls on functions handling the database.
 // If data retrieved from backend/database or data passed causes Errors, responses are returned.
-
 
 // Passes userinput from register form to backend
 export function Register(userdata) {
@@ -39,7 +37,7 @@ export function Add(userdata) {
   }).then((res) => {
     if (res.status && res.status === 200) {
       console.log("Product Added !");
-      GetProducts(); 
+      GetProducts();
       GetBookings();
     }
   });
@@ -87,7 +85,7 @@ export function RemoveBooking(IDs) {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify(IDs)
+    body: JSON.stringify(IDs),
   }).then((res) => {
     if (res.status && res.status === 200) {
       store.dispatch("deleteBooking", IDs[0], IDs[1]);
@@ -170,7 +168,7 @@ export function GetReversedProducts() {
     });
 }
 
-// Passes login-info from Login page for authentication. 
+// Passes login-info from Login page for authentication.
 export function Login(userdata) {
   fetch(`${API_URL}/login`, {
     method: "POST",

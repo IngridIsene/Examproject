@@ -59,14 +59,8 @@
             />
 
             <br />
-            <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            Book
-          </button>
+            <button type="submit" class="btn btn-primary">Book</button>
           </form>
-          
         </ul>
       </div>
     </div>
@@ -74,8 +68,6 @@
 </template>
 
 <style>
-
-
 .left {
   text-align: initial;
 }
@@ -94,10 +86,8 @@ export default {
     const startdate = ref("");
     const enddate = ref("");
 
-  
-
     const submit = () => {
-      console.log("inside submit")
+      console.log("inside submit");
       const info = [
         currentItem[0].productId,
         currentItem[0].name,
@@ -107,9 +97,7 @@ export default {
       ];
       console.log(info);
       BookProduct(info);
-    }
-
-    
+    };
 
     return {
       currentItem,

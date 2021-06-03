@@ -78,7 +78,9 @@
         class="bookings row row-cols-2 row-cols-lg-3 g-2 g-lg-3"
       >
         <div class="col" v-for="item in resultQuery" :key="item">
-          <div class="outer-border p-3 border bg-light element border border-dark">
+          <div
+            class="outer-border p-3 border bg-light element border border-dark"
+          >
             <img v-bind:src="require(`../assets/${item.productImg}`)" alt="" />
             <br />
             <h3>{{ item.name }}</h3>
@@ -102,7 +104,6 @@
             >
               Not Available
             </button>
-
 
             <button
               v-if="IsLoggedIn && item.booked == 0 && item.username != username"
@@ -130,14 +131,16 @@
             >
               Your Ad
             </button>
-
-
           </div>
         </div>
       </div>
 
       <div v-if="!gridState">
-        <div v-for="item in resultQuery" :key="item" class="row border border-dark outer-border ">
+        <div
+          v-for="item in resultQuery"
+          :key="item"
+          class="row border border-dark outer-border"
+        >
           <div class="col-sm-5">
             <img
               v-bind:src="require(`../assets/${item.productImg}`)"
@@ -149,7 +152,6 @@
             <h2>{{ item.name }}</h2>
             <p>{{ item.description }}</p>
             <p>{{ item.price }} kr,-</p>
-          
 
             <button
               v-if="!IsLoggedIn && item.booked == 0"
@@ -232,19 +234,18 @@
 img {
   width: 300px;
   height: 300px;
-  max-width: 100% ;
+  max-width: 100%;
   max-height: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.outer-border{
-  max-width: 100% ;
+.outer-border {
+  max-width: 100%;
   max-height: 100%;
   margin-top: 10px;
 }
-
 
 .btn {
   background-color: #e4d3cf;
@@ -274,8 +275,6 @@ img {
 .left {
   text-align: initial;
 }
-
-
 </style>
 
 <script>
@@ -290,9 +289,8 @@ import router from "../router/index";
 export default {
   name: "Home",
 
-  //intial function 
+  //intial function
   setup() {
-
     //retrieves variables initialized in store/index.js with getters.
     const store = useStore();
     const BookingItems = computed(() => store.getters.get_BookingItems);

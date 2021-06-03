@@ -1,31 +1,30 @@
 <template>
   <div class="about">
-
     <h1 class="h3 mb-3 font-weight-normal">Please login</h1>
-      <form @submit.prevent="submit" class="outer-border text-center">
-        <div class="form-group" style="margin-top:30px">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter username"
-            required
-            autofocus
-            v-model="username"
-          />
-        </div>
+    <form @submit.prevent="submit" class="outer-border text-center">
+      <div class="form-group" style="margin-top: 30px">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter username"
+          required
+          autofocus
+          v-model="username"
+        />
+      </div>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            class="form-control"
-            placeholder="password"
-            v-model="password"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="password"
+          v-model="password"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -40,9 +39,6 @@ form {
   margin: auto;
   position: relative;
 }
-
-
-
 </style>
 
 <script>

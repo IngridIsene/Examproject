@@ -126,7 +126,3 @@ ________________________________________________________________________________
 
 - Applikasjonen fungerer på mobilskjermer ned til 375px
 
-## Refresh Not log out 
-- Hvis bruker refresher siden blir ikke bruker logget ut. 
-- Her har det blitt brukt Vuex-persistedstate
-- Kode er funnet: https://stackoverflow.com/questions/43027499/vuex-state-on-page-refresh 
