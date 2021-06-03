@@ -112,3 +112,24 @@ def removebooking():
       return jsonify(result), 200
     else:
       return Response(status=400)
+
+
+@app.route("/api/getSortState", methods = ["POST"])
+def getSortState():
+  if request.method == "POST":
+    userdata = request.get_json()
+    result = userfunction.get_user_sort_state(userdata)
+    if result != -1: 
+      return jsonify(result), 200
+    else:
+      return Response(status=400)
+
+
+@app.route("/api/updateGridState", methods=["POST"])
+def updateGridState():
+  if request.method == "POST":
+    info = request.get_json()
+    username = info[0]
+    grid_state = info[1]
+    result = userfunction.update_grid_state(username,grid_state)
+    return Response(status=200)

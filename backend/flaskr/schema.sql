@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS users (
   firstname TEXT NOT NULL,
   lastname TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
-  sort_state TEXT NOT NULL
+  sort_state TEXT NOT NULL,
+  grid_state TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS products ( 

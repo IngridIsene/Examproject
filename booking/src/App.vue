@@ -45,6 +45,19 @@
       </div>
     </nav>
     <router-view />
+
+    <footer>
+      <br />
+      <div class="main_footer">
+        <div class="contact_information">
+          <p>
+            Customer service | customer_service@booking.com | Telephone:
+            12345678
+          </p>
+        </div>
+      </div>
+    </footer>
+
   </div>
 </template>
 
@@ -70,6 +83,17 @@
   padding: 1px;
   width: 100%;
 }
+
+.main_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 5px solid #62959c;
+  width: 100%;
+  height: 120px;
+  background-color: #e4d3cf;
+}
+
 </style>
 
 <script>

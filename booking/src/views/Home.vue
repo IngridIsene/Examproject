@@ -70,6 +70,7 @@
             </li>
           </ul>
         </div>
+        
       </form>
 
       <br />
@@ -200,17 +201,7 @@
       </div>
     </div>
 
-    <footer>
-      <br />
-      <div class="main_footer">
-        <div class="contact_information">
-          <p>
-            Customer service | customer_service@booking.com | Telephone:
-            12345678
-          </p>
-        </div>
-      </div>
-    </footer>
+   
   </div>
 </template>
 
@@ -262,16 +253,6 @@ img {
   width: 50%;
 }
 
-.main_footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 5px solid #62959c;
-  width: 100%;
-  height: 120px;
-  background-color: #e4d3cf;
-}
-
 .left {
   text-align: initial;
 }
@@ -282,8 +263,8 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 import { GetProducts } from "../services/user.services";
-import { GetReversedProducts } from "../services/user.services";
-import { update_SortState } from "../services/user.services";
+import { GetReversedProducts, getSortState } from "../services/user.services";
+import { update_SortState, updateGridState } from "../services/user.services";
 import router from "../router/index";
 
 export default {
@@ -291,6 +272,7 @@ export default {
 
   //intial function
   setup() {
+    
     //retrieves variables initialized in store/index.js with getters.
     const store = useStore();
     const BookingItems = computed(() => store.getters.get_BookingItems);
@@ -298,15 +280,61 @@ export default {
     const gridState = computed(() => store.getters.get_grid_state);
     const bookedItemsID = computed(() => store.getters.get_bookedIDs);
     const username = store.getters.get_userInfo[0].username;
+    const user_gridState = computed(() => store.getters.get_user_grid_state);
+    console.log(user_gridState.value)
 
-    // Checks users chosen sort state
-    const sort_state = store.getters.get_userInfo[0].sort_state;
-    if (sort_state == "") {
-      GetReversedProducts();
-    } else {
-      store.dispatch(sort_state);
-      router.push({ name: "Home" });
+    GetReversedProducts();
+
+    if (username == ""){
+      store.dispatch("set_grid_state", true);
+    }else{
+      if (user_gridState.value == "grid"){
+        console.log("home grid")
+        store.dispatch("set_grid_state", true);
+      }else{
+        console.log("home list")
+        store.dispatch("set_grid_state", false);
+      }
     }
+
+
+     //sort
+    const sortLowHigh = () => {
+      store.dispatch("sortLowHigh");
+      const info = [username, "sortLowHigh"];
+      update_SortState(info);
+      getSortState(username)
+      console.log("button sortLowHigh");
+      router.push({ name: "Home" });
+    };
+    //sort
+    const sortHighLow = () => {
+      store.dispatch("sortHighLow");
+      const info = [username, "sortHighLow"];
+      update_SortState(info);
+      getSortState(username)
+      console.log("button sortHighLow");
+      router.push({ name: "Home" });
+    };
+    //sort
+    const sortOldNew = () => {
+      GetProducts();
+      const info = [username, "sortOldNew"];
+      update_SortState(info);
+      getSortState(username)
+      console.log("button sortOldNew");
+      router.push({ name: "Home" });
+    };
+    //sort
+    const sortNewOld = () => {
+      GetReversedProducts();
+      const info = [username, "sortNewOld"];
+      update_SortState(info);
+      getSortState(username)
+      console.log("button sortNewOld");
+      router.push({ name: "Home" });
+    };
+    
 
     // Handles search-field and filters based on input
     const searchQuery = ref("");
@@ -323,38 +351,7 @@ export default {
       }
     });
 
-    //sort
-    const sortLowHigh = () => {
-      store.dispatch("sortLowHigh");
-      const info = [username, "sortLowHigh"];
-      update_SortState(info);
-      console.log("sortLowHigh");
-      router.push({ name: "Home" });
-    };
-    //sort
-    const sortHighLow = () => {
-      store.dispatch("sortHighLow");
-      const info = [username, "sortHighLow"];
-      update_SortState(info);
-      console.log("sortHighLow");
-      router.push({ name: "Home" });
-    };
-    //sort
-    const sortOldNew = () => {
-      GetProducts();
-      const info = [username, "sortOldNew"];
-      update_SortState(info);
-      console.log("sortOldNew");
-      router.push({ name: "Home" });
-    };
-    //sort
-    const sortNewOld = () => {
-      GetReversedProducts();
-      const info = [username, "sortNewOld"];
-      update_SortState(info);
-      console.log("sortNewOld");
-      router.push({ name: "Home" });
-    };
+   
 
     const toBooking = (item) => {
       store.dispatch("set_currentItem", item);
@@ -366,13 +363,28 @@ export default {
     };
 
     const showGrid = () => {
+      const info = [username,"grid"]
+      updateGridState(info)
+      store.dispatch("set_user_grid_state","grid")
       store.dispatch("set_grid_state", true);
       router.push({ name: "Home" });
     };
     const showList = () => {
+      const info = [username,"list"]
+      updateGridState(info)
+      store.dispatch("set_user_grid_state","list")
       store.dispatch("set_grid_state", false);
       router.push({ name: "Home" });
     };
+
+    
+
+    
+    
+
+    
+
+    
 
     return {
       BookingItems,
@@ -386,12 +398,21 @@ export default {
       sortNewOld,
       toBooking,
       username,
-      sort_state,
       showGrid,
       showList,
       gridState,
       toLogin,
+      user_gridState
+      
+      
+      
+      
+      
     };
+
+    
   },
+
+  
 };
 </script>

@@ -20,15 +20,15 @@ export default createStore({
 
     // Userinfo of currently logged in user
     user: [
-      { username: "", firstname: "", lastname: "", email: "", sort_state: "" },
+      { username: "", firstname: "", lastname: "", email: "", sort_state: "", grid_state: "" },
     ],
 
-    //today: Date().getFullYear()+'-'+(Date().getMonth()+1)+'-'+Date().getDate(),
   },
 
   mutations: {
     // sorts all elements in BookingItems from lowest to highest price
     sortLowHigh: (state) => {
+      state.user[0].sort_state = "sortLowHigh"
       state.BookingItems.sort(function (a, b) {
         return a.price - b.price;
       });
@@ -36,6 +36,7 @@ export default createStore({
 
     // sorts all elements in BookingItems from highest price to lowest price
     sortHighLow: (state) => {
+      state.user[0].sort_state = "sortHighLow"
       state.BookingItems.sort(function (a, b) {
         return b.price - a.price;
       });
@@ -54,6 +55,7 @@ export default createStore({
     },
     logout: (state) => {
       state.loggedIn = false;
+
     },
 
     // updates userinfo to current logged in user
@@ -62,7 +64,8 @@ export default createStore({
         (state.user[0].firstname = data.firstname),
         (state.user[0].lastname = data.lastname),
         (state.user[0].email = data.email),
-        (state.user[0].sort_state = data.sort_state);
+        (state.user[0].sort_state = data.sort_state),
+        (state.user[0].grid_state = data.grid_state)
     },
 
     // Adds each item retrieved from products table in database to BookingItems list.
@@ -128,6 +131,16 @@ export default createStore({
     set_grid_state: (state, grid_state) => {
       state.grid_state = grid_state;
     },
+
+    set_user_sort_state: (state, data) => {
+      state.user[0].sort_state = data.sort_state
+    },
+
+    set_user_grid_state: (state, data) => {
+      state.user[0].grid_state = data
+    },
+
+    
   },
 
   //calls on mutations
@@ -189,6 +202,20 @@ export default createStore({
     set_grid_state: (context, data) => {
       context.commit("set_grid_state", data);
     },
+
+    set_user_sort_state: (context, data) => {
+      context.commit("set_user_sort_state", data);
+    },
+
+    set_user_grid_state: (context, data) => {
+      context.commit("set_user_grid_state", data);
+    },
+
+
+
+    
+
+
   },
 
   modules: {},
@@ -225,5 +252,14 @@ export default createStore({
     get_grid_state: (state) => {
       return state.grid_state;
     },
+
+    get_user_grid_state: (state) => {
+      return state.user[0].grid_state
+    },
+
+    get_user_sort_state: (state) => {
+      return state.user[0].sort_state
+    }
   },
 });
+

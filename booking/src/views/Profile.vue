@@ -41,18 +41,21 @@
         </ul>
       </div>
     </div>
-    <br />
 
-    <div class="row">
-      <div class="col border border-dark">
-        <h2>Your bookings</h2>
+    
+      <div class="row border border-dark" style="margin-top: 10px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6  test" >
+        
+        <h2 style="margin-top: 10px;">Your bookings</h2>
         <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Booking ID</th>
-              <th scope="col">Product ID</th>
+              
               <th scope="col">Product Name</th>
               <th scope="col">Rented Date</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +63,7 @@
               <th scope="row" v-if="item.username == username">
                 {{ item.bookingId }}
               </th>
-              <td v-if="item.username == username">{{ item.productId }}</td>
+              
               <td v-if="item.username == username">{{ item.productname }}</td>
               <td v-if="item.username == username">
                 {{ item.startdate }} - {{ item.enddate }}
@@ -77,14 +80,19 @@
           </tbody>
         </table>
       </div>
+      </div>
 
-      <div class="col border border-dark">
-        <h2>Your Ads</h2>
+
+      <div class="row border border-dark " style="margin-top: 10px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 test">
+        <h2 style="margin-top: 10px;" >Your Ads</h2>
         <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Ad ID</th>
               <th scope="col">Item</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -105,16 +113,16 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <br />
-    <br />
+      </div>
+   
+   
 
-    <div class="row border border-dark">
+    <div class="row border border-dark" style="margin-top: 10px;">
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
-        <br />
-        <h2>Create an Ad</h2>
-        <br />
+        
+        <h2 style="margin-top: 10px;">Create an Ad</h2>
+        
         <form @submit.prevent="submit">
           <div class="mb-3">
             <input
@@ -181,11 +189,9 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-primary">Create Ad</button>
+          <button type="submit" class="btn btn-primary" style="margin-bottom: 10px;">Create Ad</button>
         </form>
-        <br />
-        <br />
-        <br />
+        
       </div>
     </div>
   </div>
@@ -205,6 +211,11 @@ h1 {
   position: relative;
   margin-top: 10px;
 }
+
+.test {
+  display: table;
+}
+
 </style>
 
 <script>

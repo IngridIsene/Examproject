@@ -22,11 +22,11 @@ class User:
             sql = (
                 """
                 INSERT INTO users
-                (username, password, firstname, lastname, email, sort_state) 
-                VALUES(?, ?, ?, ? ,?, ?)
+                (username, password, firstname, lastname, email, sort_state, grid_state) 
+                VALUES(?, ?, ?, ? ,?, ?, ?)
                 """
             )
-            curr.execute(sql, (username, password, firstname, lastname, email, "sortNewOld")) 
+            curr.execute(sql, (username, password, firstname, lastname, email, "sortNewOld","grid")) 
             conn.commit()
         except sqlite3.Error as err:
             print("Error: {}".format(err))
@@ -62,7 +62,7 @@ class User:
         finally:
             curr.close()
 
-   
+  
 
         
     # Handles user authentication during Login.
@@ -91,7 +91,8 @@ class User:
             "firstname" : data[0]["firstname"],
             "lastname" : data[0]["lastname"],
             "email" : data[0]["email"],
-            "sort_state" :data[0]["sort_state"]
+            "sort_state" :data[0]["sort_state"],
+            "grid_state" :data[0]["grid_state"],
           }
             return -1 
         finally:
@@ -274,4 +275,56 @@ class User:
                 curr.close()
 
     
-        
+    # Selects the row containg username input    
+    def get_user_sort_state(self, username):
+        conn = get_db()
+        curr = conn.cursor()
+        try:
+            sql = (
+                """
+                SELECT * FROM users WHERE username=?
+                """
+            )
+            curr.execute(sql, (username,))
+        except sqlite3.Error as err:
+            print("Error: {}".format(err))
+            return -1 
+        else:
+            data=curr.fetchall()
+            if len(data) != 0: 
+                if (data[0]["username"] == username):
+                    return {
+            "username" : data[0]["username"],
+            "firstname" : data[0]["firstname"],
+            "lastname" : data[0]["lastname"],
+            "email" : data[0]["email"],
+            "sort_state" :data[0]["sort_state"],
+            "grid_state" :data[0]["grid_state"],
+          }
+            return -1 
+        finally:
+            curr.close()
+
+    
+
+    def update_grid_state(self,username,grid_state):
+        conn = get_db()
+        curr = conn.cursor()
+
+        try: 
+            sql = (
+                """
+                UPDATE users SET grid_state = ? WHERE username = ?
+                """
+            )
+            curr.execute(sql, (grid_state,username,) )
+            conn.commit()
+        except sqlite3.Error as err:
+            print("Error: {}".format(err))
+            return -1 
+        else:
+            print("Grid state updated from db.")
+            
+            return curr.lastrowid 
+        finally:
+            curr.close()

@@ -84,7 +84,9 @@ ________________________________________________________________________________
 
 - Brukeren vil ha den samme funksjonaliteten når han/hun har logget inn. Men følgende funksjonalitet er også lagt til: 
 
-- Preferert sortering blir lagret, dvs at hvis brukeren velger å eksempel se utstyret basert på Price "Low til High" vil dette lagres slik at neste gang brukeren logger inn vil den valgte preferansen vises. Dette blir lagret i databasen knyttet til "username" og OPPDATERES når brukeren velger en annen måte å sortere annonsene/ustryret på. 
+- Preferert sortering blir lagret, dvs at hvis brukeren kan velge å lagre display enten grid eller list. Dette vil være tilgjengelig neste gang brukeren logger inn. By default vises grid.
+
+- Den preferte sorteringen lagres selvom brukeren laster opp annonse, booker utstyr eller sletter bookinger.
 
 - Det er også lagt til en ekstra knapp som viser "Your ad" under utstyret som du selv har lagt, dvs at det IKKE er mulig å booke egne annonser. 
 
@@ -94,7 +96,7 @@ ________________________________________________________________________________
 
 - Brukerens brukerinformasjon er lagret og vil vises under "Profile information"
 
-- "Your bookings" viser oversikt over utstyret brukeren har booket. Her vises booking id, produkt id, produkt navn og til/fra dato utstyret er booket. 
+- "Your bookings" viser oversikt over utstyret brukeren har booket. Her vises booking id, produkt navn og til/fra dato utstyret er booket. 
 
 - "Your Ads" viser oversikt over egne annonser. Det er lagt til en knapp i denne tabellen "X" som gjør det mulig for brukeren å SLETTE egne annonser (Må være innloget for dette og det er kun mulig å slette egne annonser). Dersom en annonse slettes forsvinner den fra forsiden, MEN den vil ikke slettes fra "Your Ads" dersom en annen bruker har booket utstyret. 
 

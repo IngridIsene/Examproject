@@ -215,3 +215,45 @@ export function update_SortState(info) {
     }
   });
 }
+
+
+//Retrives users sort state from database
+export function getSortState(username) {
+  fetch(`${API_URL}/getSortState`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(username),
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error("Respons ikke ok");
+    })
+    .then((data) => {
+      store.dispatch("set_user_sort_state", data);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+}
+
+// Updates the current users selection of display by passing the state to the backend (Grid / List)
+export function updateGridState(info) {
+  fetch(`${API_URL}/updateGridState`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
+  }).then((res) => {
+    if (res.status && res.status === 200) {
+      console.log("Grid state updated!");
+    } else if (res.status && res.status === 400) {
+      console.log("Grid state not updated !");
+    }
+  });
+}
