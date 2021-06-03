@@ -2,21 +2,23 @@
 # Booking side av sommerutstyr
 
 Det er lagt til en bruker til sensor i databasen som kan brukes hvis ønskelig:
-Brukernavn: Sensor 
-Passord: Sommer2021! 
+- **Brukernavn: Sensor**
+- **Passord: Sommer2021!**
 
 Fra før er det lagt til data i database filen database.db,  Schema.sql inneholder tre tables:
 1. users --> som inneholder alle registrerte brukere
+
 2. products --> Som inneholder alle annonser / utstyr som har blitt opprettet 
+
 3. bookings  -->  som inneholder hvem som har booket hvilket utstyr
 
-- Det har blitt brukt VUE version 3 i dette prosjektet + VUE CLI.
+- **Det har blitt brukt VUE version 3 i dette prosjektet + VUE CLI.**
 
-- Det har blitt brukt bootstrap 5 til å bygge opp applikasjonen --> https://getbootstrap.com/docs/5.0/getting-started/introduction/ 
+- **Det har blitt brukt bootstrap 5 til å bygge opp applikasjonen --> https://getbootstrap.com/docs/5.0/getting-started/introduction/**
 
-- Bootstrap er brukt til blant annet login form, registration form, booking cards, create add, your ads, your bookings og booking side.  
+- **Bootstrap er brukt til blant annet login form, registration form, booking cards, create add, your ads, your bookings og booking side.**  
 
-- Det er lagt til requirements.txt fil. 
+- **Det er lagt til requirements.txt fil.**
 
 
 
@@ -24,12 +26,10 @@ Fra før er det lagt til data i database filen database.db,  Schema.sql innehold
 Her er link til github prosjektet, her ligger sourcecode tilgjengelig for nedlastning: https://github.com/IngridIsene/Examproject
 
 
-
-
-
 ________________________________________________________________________________________________________________________________________
 
 ## Hvordan kjøre applikasjonen? 
+**(Vue cli kan installeres med følgende command: npm install -g @vue/cli hvis det ikke allerede er installert på din pc)**
 
 - Selve prosjektet ligger i Examproject mappen.
 
@@ -37,15 +37,17 @@ ________________________________________________________________________________
 
 - Det vil da komme opp booking som et alternativ --> kjør da commanden "cd booking"
 
-- Når man er inne i booking filen --> kjør command npm run serve (Da starter frontend) 
+- Siden Zip filen/github repo ikke inneholder node_module må dette installeres i booking kjør derfor: **npm install**
+
+- Når npm har blitt installert kan programmes kjøres. bruk command: **npm run serve** (Da starter frontend) 
 
 - Åpne en ny terminal og skriv igjen ls 
 
-- Det vil da komme opp backend som et alternativ --> kjørt da commanden "cd backend" 
+- Det vil da komme opp backend som et alternativ --> kjør da commanden "cd backend" 
 
-- Når man er inne i backend filen --> kjør command "python3 booking.py" (Da starter backend)
+- Når man er inne i backend filen --> bruk command: **python3 booking.py** (Da starter backend)
 
-- HVIS venv må aktiveres i backend gjøres det med følgende command: source venv/bin/activate (PÅ MAC)
+- HVIS venv må aktiveres i backend gjøres det med følgende command: source venv/bin/activate (PÅ macOS)
 ________________________________________________________________________________________________________________________________________
 
 # FUNKSJONALITET 
@@ -60,7 +62,7 @@ ________________________________________________________________________________
 
 -  Passordet kreves en lengde på minst 7 characters og det kreves et spesialtegn, hvis dette ikke oppfylles vil en melding vises. 
 
-- Når det har blitt registrert en bruker vil brukeren få mulighet til å logge inn ved å trykke på log in i navbaren. Her logges det inn med brukernavn og passord. Hvis brukernavn og passord ikke matches kommer det følgende melding opp: "Username or password incorrect, Try again!" 
+- Når det har blitt registrert en bruker vil brukeren få mulighet til å logge inn ved å trykke på "login" i navbaren. Her logges det inn med brukernavn og passord. Hvis brukernavn og passord ikke matches kommer det følgende melding opp: "Username or password incorrect, Try again!" Dette blir sjekket i backend. 
 
 
 ## Home (Bruker ikke logget inn) 
@@ -69,7 +71,7 @@ ________________________________________________________________________________
 
 - Knappen viser "Book" dersom utstyret ikke er booket av en annen bruker eller "Not Available" dersom utstyret er booket av en annen bruker.
 
-- Dersom man ikke er logget inn og trykker på "Book" vil man bli sendt til "log in" siden.
+- Dersom man ikke er logget inn og trykker på "Book" vil man bli sendt til "login" siden.
 
 - Brukeren kan velge å sortere utstyret basert på: Price "low til high" eller "high til low" og "Oldest to newest Ads" eller "Newest to Oldest Ads". By default vises "Newest to oldest" på homepage når bruker ikke er logget inn. 
 
@@ -98,7 +100,7 @@ ________________________________________________________________________________
 
 - Brukeren kan laste opp egne annonser under "Create an Ad". Her fylles "Product name", "Price", "Dato til og fra" og "Description" ut. Det er også mulig å velge default bilder til annonsen i en dropdown meny. Når en annonse er opprettet blir den lagt til på forsiden og i "Your Ads" tabellen.
 
-- Brukeren må fylle ut alle felt når en annonse opprettes og vil få en feilmelding hvis dette ikke blir gjort.
+- Brukeren må fylle ut alle felt når en annonse opprettes og vil få en "vennligst fyll ut feltet" hvis dette ikke blir gjort.
 
 - Det er KUN mulig å velge dato fra dagens dato og fremover når en annonse opprettes, så hvis man velger fra-dato: "04.06.2021" så kan til-dato IKKE være "01.06.2021" den MÅ være frem i tid. 
 
