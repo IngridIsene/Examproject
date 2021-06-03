@@ -98,7 +98,7 @@ ________________________________________________________________________________
 
 - "Your bookings" viser oversikt over utstyret brukeren har booket. Her vises booking id, produkt navn og til/fra dato utstyret er booket. 
 
-- "Your Ads" viser oversikt over egne annonser. Det er lagt til en knapp i denne tabellen "X" som gjør det mulig for brukeren å SLETTE egne annonser (Må være innloget for dette og det er kun mulig å slette egne annonser). Dersom en annonse slettes forsvinner den fra forsiden, MEN den vil ikke slettes fra "Your Ads" dersom en annen bruker har booket utstyret. 
+- "Your Ads" viser oversikt over egne annonser. Det er lagt til en knapp i denne tabellen "X" som gjør det mulig for brukeren å SLETTE egne annonser (Må være innloget for dette og det er kun mulig å slette egne annonser). Dersom en annonse slettes forsvinner den fra forsiden, MEN den vil ikke slettes fra "Your bookings" dersom en annen bruker har booket utstyret, altså den forsvinner ikke hos brukeren som har booket utstyret.
 
 - Brukeren kan laste opp egne annonser under "Create an Ad". Her fylles "Product name", "Price", "Dato til og fra" og "Description" ut. Det er også mulig å velge default bilder til annonsen i en dropdown meny. Når en annonse er opprettet blir den lagt til på forsiden og i "Your Ads" tabellen.
 
@@ -122,7 +122,7 @@ ________________________________________________________________________________
 
 - Det er lagt inn forside bilde på forsiden 
 
-- Det er lagt til en footer på forsiden 
+- Det er lagt til en footer på applikasjonen 
 
 - Hver annonse inneholder et bilde
 
