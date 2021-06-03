@@ -84,9 +84,9 @@ ________________________________________________________________________________
 
 - Brukeren vil ha den samme funksjonaliteten når han/hun har logget inn. Men følgende funksjonalitet er også lagt til: 
 
-- Preferert sortering blir lagret, dvs at hvis brukeren kan velge å lagre display enten grid eller list. Dette vil være tilgjengelig neste gang brukeren logger inn. By default vises grid.
+- Preferert DISPLAY blir lagret, dvs at hvis brukeren kan velge å lagre display enten grid eller list. Dette vil være tilgjengelig neste gang brukeren logger inn. By default vises grid.
 
-- Den preferte sorteringen lagres selvom brukeren laster opp annonse, booker utstyr eller sletter bookinger.
+- Den preferte DISPLAY lagres selvom brukeren laster opp annonse, booker utstyr eller sletter bookinger.
 
 - Det er også lagt til en ekstra knapp som viser "Your ad" under utstyret som du selv har lagt, dvs at det IKKE er mulig å booke egne annonser. 
 
