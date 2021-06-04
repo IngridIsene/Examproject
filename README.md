@@ -69,7 +69,7 @@ ________________________________________________________________________________
 
 - Det er mulighet for å se produktene/utstyret som kan bookes uten å logge inn. 
 
-- Knappen viser "Book" dersom utstyret ikke er booket av en annen bruker eller "Not Available" dersom utstyret er booket av en annen bruker.
+- Knappen viser "Book" dersom utstyret er tilgjengelig (dvs ikke booket av deg selv eller en annen bruker) eller "Not Available" dersom utstyret er booket av en annen bruker eller deg selv.
 
 - Dersom man ikke er logget inn og trykker på "Book" vil man bli sendt til "login" siden.
 
@@ -84,7 +84,7 @@ ________________________________________________________________________________
 
 - Brukeren vil ha den samme funksjonaliteten når han/hun har logget inn. Men følgende funksjonalitet er også lagt til: 
 
-- Preferert DISPLAY blir lagret, dvs brukeren kan velge å lagre display enten "grid" eller "list". Dette vil være tilgjengelig neste gang brukeren logger inn. By default vises grid.
+- Preferert DISPLAY blir lagret, dvs brukeren kan velge å lagre display enten "grid" eller "list". Dette vil være tilgjengelig neste gang brukeren logger inn. By default vises grid. Det er lagt til grid_state i user table i databasen som oppdaterer seg når bruker velger et annet display.
 
 - Den preferte DISPLAY lagres selvom brukeren laster opp annonse, booker utstyr eller sletter bookinger.
 
