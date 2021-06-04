@@ -52,7 +52,7 @@
               class="form-control"
               v-model="enddate"
               v-bind:min="`${item.startdate}`"
-              v-bind:max="`${item.enddate}`"
+              :max="`${item.enddate}`"
               type="date"
               id="example-date-input"
               required
@@ -87,16 +87,20 @@ export default {
     const enddate = ref("");
 
     const submit = () => {
-      console.log("inside submit");
-      const info = [
-        currentItem[0].productId,
-        currentItem[0].name,
-        myUser,
-        startdate.value,
-        enddate.value,
-      ];
-      console.log(info);
-      BookProduct(info);
+      if (enddate.value < startdate.value){
+        alert("End-date cannot be before start-date! Please change dates.")
+      }else{
+        console.log("inside submit");
+        const info = [
+          currentItem[0].productId,
+          currentItem[0].name,
+          myUser,
+          startdate.value,
+          enddate.value,
+        ];
+        console.log(info);
+        BookProduct(info);
+      }
     };
 
     return {

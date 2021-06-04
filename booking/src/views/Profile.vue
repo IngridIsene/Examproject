@@ -150,6 +150,7 @@
               type="date"
               id="example-date-input"
               :min="today"
+              :max="end_date"
               v-model="start_date"
               required
             />

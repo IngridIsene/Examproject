@@ -106,12 +106,16 @@ ________________________________________________________________________________
 
 - Det er KUN mulig å velge dato fra dagens dato og fremover når en annonse opprettes, så hvis man velger fra-dato: "04.06.2021" så kan til-dato IKKE være "01.06.2021" den MÅ være frem i tid. 
 
+- Hvis slutt dato velges FØR start dato, feks slutt-dato: 25.07.2021 kan IKKE start-dato være 30.07.2021. Dette har blitt håndtert og kalenderen vil oppdatere seg basert på datovalg. 
+
 ##  Book 
 - Hvis utstyret er ledig vil en "Book" knapp vises under annonsen. Hvis man trykker på "Book" knappen vil man komme til en ny side som viser bilde av utstyret, pris, beskrivelse og availability.
 
 - Her velges perioden (til og fra dato) og det er KUN mulig å velge dato fra når utstyret er ledig. 
 
 - Brukeren MÅ velge dato for booking og vil ikke kunne gå videre uten å velge dato
+
+- Hvis slutt-dato velges FØR start-dato feks at slutt-dato er 25.06.2021 og bruker velger start-dato 30.06.2021, vil det komme en melding som ber brukeren velge dato på nytt slik at det blir riktig. 
 
 - Når utstyret bookes OPPDATERES knappen fra "Book" til "Not avilable" på fremsiden. Den blir også lagt til i "Your bookings" på profilen. 
 
