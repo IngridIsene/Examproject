@@ -13,7 +13,7 @@ from .dbfunctions import userfunction
 def index():
   return "Return production build here"
 
-# Calls on new_user function located in 
+ 
 @app.route("/api/register", methods=["POST"])
 def register():
   if request.method == "POST":
